@@ -10,6 +10,7 @@ import os
 
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+INTERVAL_IN_S = 60 * 10 # every 10 minutes
 
 
 # List to hold the file paths of captured images
@@ -63,7 +64,7 @@ async def main():
         while True:
             current_time = time.time()
 
-            if current_time - last_capture_time >= 10:
+            if current_time - last_capture_time >= INTERVAL_IN_S:
                 take_picture()
                 last_capture_time = current_time
 
