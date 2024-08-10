@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "plant-cam"
+version = "0.1.0"
+description = ""
+authors = ["Johannes Neuhaus <johannes.neuhaus@mailbox.org>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+opencv-python = "^4.10.0.84"
+pillow = "^10.4.0"
+python-telegram-bot = "^21.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
