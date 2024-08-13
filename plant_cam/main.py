@@ -10,7 +10,7 @@ import os
 
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
-INTERVAL_IN_S = 60 * 10 # every 10 minutes
+INTERVAL_IN_S = 60 * 30 # every 10 minutes
 
 
 # List to hold the file paths of captured images
@@ -35,7 +35,7 @@ def take_picture():
     else:
         print("Error: Could not capture image.")
 
-def create_gif(images, duration=500):
+def create_gif(images, duration=250):
     frames = [Image.open(img) for img in images]
     timestamp = time.strftime("%Y%m%d-%H%M%S")
     gif_filename = f"webcam_timelapse_{timestamp}.gif"
@@ -63,8 +63,10 @@ async def main():
     try:
         while True:
             current_time = time.time()
+            is_daytime = 22 > datetime.datetime.now().hour > 5
+            is_interval_passed = current_time - last_capture_time >= INTERVAL_IN_S
 
-            if current_time - last_capture_time >= INTERVAL_IN_S:
+            if is_interval_passed and is_daytime:
                 take_picture()
                 last_capture_time = current_time
 
